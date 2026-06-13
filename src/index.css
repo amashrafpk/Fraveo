@@ -3,69 +3,52 @@
 @tailwind utilities;
 
 @layer base {
-  html, body {
-    margin: 0;
-    padding: 0;
+  html {
+    scroll-behavior: smooth;
     background-color: #000000;
-    overflow-x: hidden;
+    /* Hardware accelerated smooth font smoothing mechanics */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* --- MOBILE DEFAULT SETTINGS --- */
-  .snap-container {
-    height: 100vh;
-    height: 100dvh;
-    overflow-y: auto;
-    /* Mandatory snapping gives mobile that crisp, native app swipe feel */
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .snap-section {
-    height: 100vh;
-    height: 100dvh;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    /* Align to top on mobile so titles have guaranteed clearance from the navbar */
-    justify-content: flex-start;
-    padding-top: 5.5rem; /* Pushes the title safely below your fixed header */
-  }
-
-  /* --- DESKTOP / PC OVERRIDES (1024px and up) --- */
-  @media (min-width: 1024px) {
-    .snap-container {
-      /* Proximity prevents mouse wheel fights on PC */
-      scroll-snap-type: y proximity;
-    }
-    .snap-section {
-      scroll-snap-align: center;
-      /* Return to perfect vertical centering on large monitors */
-      justify-content: center;
-      padding-top: 0;
-    }
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+    color: #ffffff;
+    overflow-x: hidden;
   }
 }
 
-/* Background vertical grid lines */
+/* Elegant, beautifully fluid display sections */
+.display-section {
+  min-height: 100vh;
+  min-height: 100dvh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Background vertical layout lines */
 .bg-grid-lines {
   background-size: 40px 100%;
   background-image: linear-gradient(to right, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
 }
 
-/* Custom minimal scrollbar */
-.snap-container::-webkit-scrollbar {
-  width: 4px;
+/* Luxury minimal customized scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
 }
-.snap-container::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.8);
+::-webkit-scrollbar-track {
+  background: #000000;
 }
-.snap-container::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
   border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
 }

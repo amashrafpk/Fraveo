@@ -8,7 +8,7 @@ export default function App() {
   // ----------------------------------------------------------------------
   const layoutConfig = {
     // Shifting the centered Home content upward toward the topbar (use negative for up, positive for down)
-    homeVerticalShift: "-40px", 
+    homeVerticalShift: "-15px", 
     
     // The exact distance pulling the footer closer to the Contact text block
     contactToFooterGap: "40px",
@@ -116,7 +116,7 @@ export default function App() {
         >
           {/* Status Badge */}
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-neutral-800 bg-neutral-950/60 backdrop-blur-sm mb-6 sm:mb-8">
-            <span className="relative flex h-1.5 w-1.5 bg-neutral-500 rounded-full overflow-hidden">
+            <span className="relative flex h-1.5 w-1.5 bg-neutral-900 rounded-full overflow-hidden">
               <span className="animate-pulse absolute inline-flex h-full w-full rounded-full bg-white"></span>
             </span>
             <span className="text-[10px] sm:text-[11px] tracking-wide text-neutral-400 font-normal">Currently in development</span>
@@ -156,7 +156,7 @@ export default function App() {
                 </div>
                 <h3 className="text-xl sm:text-2xl font-medium text-white mb-1.5 sm:mb-3">Fraevo Fashion</h3>
                 <p className="text-xs sm:text-sm text-neutral-400 font-light leading-relaxed max-w-xs">
-                  Reimagining the future of fashion through AI-powered experiences.
+                  Reimagining the future of fashion.
                 </p>
               </div>
               <div className="pt-4 sm:pt-6">

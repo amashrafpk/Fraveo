@@ -5,21 +5,34 @@ export default function App() {
   const [activeSection, setActiveSection] = useState('home');
 
   // Monitor scrolling to highlight the correct item in our custom floating dock
+// Monitor scrolling accurately to highlight the correct item in our floating dock
   useEffect(() => {
     const container = document.querySelector('.snap-container');
     const handleScroll = () => {
       if (!container) return;
-      const scrollPosition = container.scrollTop;
-      const height = container.clientHeight;
-      const index = Math.round(scrollPosition / height);
       
       const sections = ['home', 'products', 'services', 'contact'];
-      if (sections[index]) {
-        setActiveSection(sections[index]);
-      }
+      let currentSection = 'home';
+      let minDistance = Infinity;
+
+      // Calculate which section's center is closest to the screen's visual midpoint
+      sections.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          const distanceToCenter = Math.abs(rect.top + rect.height / 2 - window.innerHeight / 2);
+          if (distanceToCenter < minDistance) {
+            minDistance = distanceToCenter;
+            currentSection = id;
+          }
+        }
+      });
+
+      setActiveSection(currentSection);
     };
 
-    container.addEventListener('scroll', handleScroll);
+    // Passive listener improves browser scrolling frame rates
+    container.addEventListener('scroll', handleScroll, { passive: true });
     return () => container.removeEventListener('scroll', handleScroll);
   }, []);
 

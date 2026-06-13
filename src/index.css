@@ -8,23 +8,29 @@
     padding: 0;
     background-color: #000000;
     overflow-x: hidden;
+    /* Clean up native momentum physics on touch surfaces */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Core container enabling vertical slide snapping tracking */
+  /* Core container - tuned to proximity for hardware balance */
   .snap-container {
     height: 100vh;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
+    height: 100dvh;
+    overflow-y: auto;
+    /* proximity prevents desktop mouse-wheel fights while keeping mobile swipes crisp */
+    scroll-snap-type: y proximity;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
   }
 
-  /* Force each section to be EXACTLY the height of the current viewport device screen */
+  /* Force each section slide to center precisely on screen */
   .snap-section {
     height: 100vh;
-    height: 100dvh; /* Dynamic viewport height to fix mobile browser address bar layout jumps */
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
+    height: 100dvh;
+    /* center ensures headers and titles never hide under viewport margins */
+    scroll-snap-align: center;
+    scroll-snap-stop: normal;
     position: relative;
     overflow: hidden;
     display: flex;
@@ -37,4 +43,19 @@
 .bg-grid-lines {
   background-size: 40px 100%;
   background-image: linear-gradient(to right, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
+}
+
+/* Add custom subtle scrollbar to match the high-end minimalist theme */
+.snap-container::-webkit-scrollbar {
+  width: 4px;
+}
+.snap-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.8);
+}
+.snap-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 99px;
+}
+.snap-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
 }

@@ -8,44 +8,57 @@
     padding: 0;
     background-color: #000000;
     overflow-x: hidden;
-    /* Clean up native momentum physics on touch surfaces */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Core container - tuned to proximity for hardware balance */
+  /* --- MOBILE DEFAULT SETTINGS --- */
   .snap-container {
     height: 100vh;
     height: 100dvh;
     overflow-y: auto;
-    /* proximity prevents desktop mouse-wheel fights while keeping mobile swipes crisp */
-    scroll-snap-type: y proximity;
+    /* Mandatory snapping gives mobile that crisp, native app swipe feel */
+    scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
   }
 
-  /* Force each section slide to center precisely on screen */
   .snap-section {
     height: 100vh;
     height: 100dvh;
-    /* center ensures headers and titles never hide under viewport margins */
-    scroll-snap-align: center;
-    scroll-snap-stop: normal;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
     position: relative;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* Align to top on mobile so titles have guaranteed clearance from the navbar */
+    justify-content: flex-start;
+    padding-top: 5.5rem; /* Pushes the title safely below your fixed header */
+  }
+
+  /* --- DESKTOP / PC OVERRIDES (1024px and up) --- */
+  @media (min-width: 1024px) {
+    .snap-container {
+      /* Proximity prevents mouse wheel fights on PC */
+      scroll-snap-type: y proximity;
+    }
+    .snap-section {
+      scroll-snap-align: center;
+      /* Return to perfect vertical centering on large monitors */
+      justify-content: center;
+      padding-top: 0;
+    }
   }
 }
 
-/* Background vertical grid lines from your layout screenshots */
+/* Background vertical grid lines */
 .bg-grid-lines {
   background-size: 40px 100%;
   background-image: linear-gradient(to right, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
 }
 
-/* Add custom subtle scrollbar to match the high-end minimalist theme */
+/* Custom minimal scrollbar */
 .snap-container::-webkit-scrollbar {
   width: 4px;
 }
@@ -55,7 +68,4 @@
 .snap-container::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 99px;
-}
-.snap-container::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.25);
 }
